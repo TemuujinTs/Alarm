@@ -1,5 +1,6 @@
 package com.temka.alarm;
 
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final long START_TIME_IN_MILLIS = 1500000;
+    private static final long START_TIME_IN_MILLIS = 12000;
     private TextView countdownText;
     private Button countdownButton;
     private Button countResetButton;
+    private MediaPlayer mp;
 
     private CountDownTimer countDownTimer;
     private long timeLeftMillseconds = START_TIME_IN_MILLIS;
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 countdownButton.setText("START");
                 countResetButton.setVisibility(View.VISIBLE);
                 countdownButton.setVisibility(View.INVISIBLE);
+                song();
+
 
 
 
@@ -87,7 +91,14 @@ public class MainActivity extends AppCompatActivity {
 
             timerRunning = true;
         }
+public void song(){
 
+        if(mp ==null){
+    mp = MediaPlayer.create(this,R.raw.alarm_classic);
+       mp.start();
+
+        }
+}
 
     public void stopTimer()
         {
@@ -95,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         timerRunning = false;
         countdownButton.setText("START");
         countResetButton.setVisibility(View.VISIBLE);
+
 
 
     }
